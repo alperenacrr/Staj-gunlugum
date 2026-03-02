@@ -38,7 +38,7 @@ p {
     line-height: 1.6;
 }
 
-/* --- Kutu Yapıları (Güncellendi) --- */
+/* --- Kutu Yapıları --- */
 #staj-gunlugu {
     width: 100%;
     display: flex;
@@ -167,18 +167,25 @@ body.dark-mode {
     color: #ffffff !important;
 }
 
-/* Tüm Kutu Yapıları ve Yazı Elemanları için Koyu Mod */
+/* KESİN ÇÖZÜM: 
+   Kutu arka planlarını 'transparent' yapıyoruz
+   ve gölgelerini kaldırıyoruz.
+*/
 body.dark-mode .gunluk-kart,
 body.dark-mode #hakkinda,
-body.dark-mode #staj-sayaci,
+body.dark-mode #staj-sayaci {
+    background-color: transparent !important;
+    box-shadow: none !important;
+    border: 1px solid #444 !important; /* İstersen çok hafif bir çerçeve kalabilir */
+}
+
+/* Yazı Elemanları için Koyu Mod */
 body.dark-mode h1,
 body.dark-mode h2,
 body.dark-mode h3,
 body.dark-mode p,
 body.dark-mode header p {
-    background-color: #333333 !important;
     color: #ffffff !important;
-    border-color: #444 !important;
 }
 
 body.dark-mode .slider {
@@ -201,7 +208,7 @@ body.dark-mode .pagination a:hover {
     border-color: #3498db !important;
 }
 
-/* --- Dark Mode Yazı Rengi Düzeltmesi (Eklendi) --- */
+/* --- Dark Mode Yazı Rengi Düzeltmesi --- */
 body.dark-mode .theme-switch-wrapper em {
     color: #ffffff !important;
 }
