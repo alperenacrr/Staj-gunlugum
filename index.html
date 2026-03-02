@@ -8,7 +8,13 @@
 </head>
 <body>
     
-    <button id="dark-mode-toggle">Modu Değiştir 🌙</button>
+    <div class="theme-switch-wrapper">
+        <label class="theme-switch" for="checkbox">
+            <input type="checkbox" id="checkbox" />
+            <div class="slider round"></div>
+        </label>
+        <em style="margin-left: 10px; font-size: 0.9em;">Karanlık Mod</em>
+    </div>
 
     <header>
         <img src="resimler/profil.jpg" alt="Profil Fotoğrafım" class="profil-resmi">
@@ -84,27 +90,28 @@
 
         document.getElementById("sayac-metni").innerText = mesaj;
 
-        // --- DARK MODE JAVASCRIPT ---
-        const toggleButton = document.getElementById('dark-mode-toggle');
-        const body = document.body;
+        // --- DARK MODE JAVASCRIPT (SWITCH) ---
+        const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
+        const currentTheme = localStorage.getItem('theme');
 
-        // Sayfa yüklendiğinde kullanıcının tercihini kontrol et
-        if (localStorage.getItem('dark-mode') === 'enabled') {
-            body.classList.add('dark-mode');
-            toggleButton.textContent = 'Modu Değiştir ☀️';
+        if (currentTheme) {
+            document.body.classList.add(currentTheme);
+            if (currentTheme === 'dark-mode') {
+                toggleSwitch.checked = true;
+            }
         }
 
-        toggleButton.addEventListener('click', () => {
-            body.classList.toggle('dark-mode');
-            
-            if (body.classList.contains('dark-mode')) {
-                toggleButton.textContent = 'Modu Değiştir ☀️';
-                localStorage.setItem('dark-mode', 'enabled');
+        function switchTheme(e) {
+            if (e.target.checked) {
+                document.body.classList.add('dark-mode');
+                localStorage.setItem('theme', 'dark-mode');
             } else {
-                toggleButton.textContent = 'Modu Değiştir 🌙';
-                localStorage.setItem('dark-mode', 'disabled');
+                document.body.classList.remove('dark-mode');
+                localStorage.setItem('theme', 'light-mode');
             }
-        });
+        }
+
+        toggleSwitch.addEventListener('change', switchTheme, false);
         // ----------------------------
     </script>
 
