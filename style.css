@@ -105,52 +105,23 @@ p {
     border: 2px solid #3498db;
 }
 
-/* --- DARK MODE ÖZELLİKLERİ --- */
+/* --- DARK MODE ÖZELLİKLERİ (Yazı Sorunu Çözüldü) --- */
 body.dark-mode {
-    background-color: #1a1a1a; /* Koyu arka plan */
-    color: #ffffff;            /* Beyaz yazılar */
+    background-color: #1a1a1a !important; /* Arka planı koyulaştır */
+    color: #ffffff !important;            /* Genel yazıları beyaza çevir */
 }
 
-/* Hakkında ve Sayaç Bölümleri için Koyu Mod */
-section#hakkinda, 
-section#staj-sayaci {
-    transition: background-color 0.3s;
-}
-
-body.dark-mode section#hakkinda {
-    background-color: #333333 !important;
-    color: #ffffff;
-    border: 1px solid #444 !important;
-}
-
-body.dark-mode section#staj-sayaci {
-    background-color: #333333 !important;
-    color: #ffffff;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3) !important;
-}
-
-body.dark-mode h1, 
-body.dark-mode h2, 
-body.dark-mode h3, 
+/* Kutu içlerindeki tüm elemanlar */
+body.dark-mode .gunluk-kart,
+body.dark-mode section#hakkinda,
+body.dark-mode section#staj-sayaci,
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
 body.dark-mode p {
-    color: #ffffff !important;
-}
-
-body.dark-mode .gunluk-kart {
-    background-color: #333333;
-    color: #ffffff;
-    border: 1px solid #444;
-}
-
-body.dark-mode .pagination a {
-    background-color: #444;
-    color: white;
-    border: 2px solid #666;
-}
-
-body.dark-mode .pagination a:hover {
-    background-color: #3498db;
-    border: 2px solid #3498db;
+    background-color: #333333 !important; /* Kutuları koyulaştır */
+    color: #ffffff !important;            /* İçindeki yazıları beyaza çevir */
+    border-color: #444 !important;
 }
 
 /* Butonun stili (Fixed Pozisyon) */
@@ -169,7 +140,19 @@ body.dark-mode .pagination a:hover {
 }
 
 body.dark-mode #dark-mode-toggle {
-    background-color: #f1c40f;
-    color: #000;
+    background-color: #f1c40f !important;
+    color: #000 !important;
 }
-/* ---------------------------- */
+
+/* Sayfalama butonları koyu mod */
+body.dark-mode .pagination a {
+    background-color: #444 !important;
+    color: white !important;
+    border-color: #666 !important;
+}
+
+body.dark-mode .pagination a:hover {
+    background-color: #3498db !important;
+    border-color: #3498db !important;
+}
+/* -------------------------------------------------- */
