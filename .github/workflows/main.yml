@@ -1,0 +1,16 @@
+name: Kod Kontrol Robotu 🤖
+
+on: [push] # Her kod yüklediğinde çalışır
+
+jobs:
+  check-html:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Kodu kopyala
+        uses: actions/checkout@v4
+
+      - name: HTML Kontrolü Yap
+        run: |
+          echo "HTML dosyaları taranıyor..."
+          # Basit bir kontrol: index.html dosyası var mı?
+          ls index.html
