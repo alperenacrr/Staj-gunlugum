@@ -14,6 +14,34 @@
         <p>IMECAR Stajyeri</p>
     </header>
 
+    <section id="staj-sayaci" style="text-align: center; background: white; padding: 20px; border-radius: 10px; max-width: 600px; margin: 20px auto; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+        <h3 style="margin-top: 0; color: #2c3e50;">Staj Durumu</h3>
+        <p id="sayac-metni" style="font-size: 1.2em; font-weight: bold; color: #3498db; margin: 0;"></p>
+    </section>
+
+    <script>
+        // --- TARİHLERİ BURADAN GÜNCELLE ---
+        const stajBaslangic = new Date("2026-02-09"); // YYYY-MM-DD
+        const stajBitis = new Date("2026-05-24");     // YYYY-MM-DD
+        // ----------------------------------
+
+        const bugun = new Date();
+        // Süreyi gün cinsinden hesapla
+        const toplamSure = Math.ceil((stajBitis - stajBaslangic) / (1000 * 60 * 60 * 24));
+        const gecenSure = Math.ceil((bugun - stajBaslangic) / (1000 * 60 * 60 * 24));
+        
+        let mesaj = "";
+        if (bugun < stajBaslangic) {
+            mesaj = "Staj henüz başlamadı.";
+        } else if (bugun > stajBitis) {
+            mesaj = "Staj başarıyla tamamlandı!";
+        } else {
+            // Sadece iş günlerini hesaplamaz, takvim gününü hesaplar.
+            mesaj = `${gecenSure} / ${toplamSure} Gün Tamamlandı`;
+        }
+
+        document.getElementById("sayac-metni").innerText = mesaj;
+    </script>
     <section id="staj-gunlugu">
         <h2>Staj Günlüğüm (Sayfa 1)</h2>
 
