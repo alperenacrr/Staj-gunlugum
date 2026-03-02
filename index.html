@@ -34,10 +34,23 @@
             suankiTarih.setHours(0,0,0,0);
             bitis.setHours(0,0,0,0);
 
+            // 2026 Resmi Tatil Listesi (Yıl bazlı manuel eklendi)
+            const resmiTatiller = [
+                "2026-03-20", // Ramazan Bayramı 1. Gün
+                "2026-03-21", // Ramazan Bayramı 2. Gün
+                "2026-03-22", // Ramazan Bayramı 3. Gün
+                "2026-04-23", // Ulusal Egemenlik ve Çocuk Bayramı
+                "2026-05-01", // Emek ve Dayanışma Günü
+                "2026-05-19"  // Atatürk'ü Anma, Gençlik ve Spor Bayramı
+            ];
+
             while (suankiTarih <= bitis) {
                 // 0 = Pazar, 6 = Cumartesi
                 let gun = suankiTarih.getDay();
-                if (gun !== 0 && gun !== 6) {
+                let tarihStr = suankiTarih.toISOString().split('T')[0];
+
+                // Hafta sonu değilse VE resmi tatil değilse say
+                if (gun !== 0 && gun !== 6 && !resmiTatiller.includes(tarihStr)) {
                     isGunuSayisi++;
                 }
                 suankiTarih.setDate(suankiTarih.getDate() + 1);
@@ -118,4 +131,4 @@
     </section>
 
 </body>
-</html>
+</html> 
