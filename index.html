@@ -8,28 +8,29 @@
 </head>
 <body>
     
+    <button id="dark-mode-toggle">Modu Değiştir 🌙</button>
+
     <header>
         <img src="resimler/profil.jpg" alt="Profil Fotoğrafım" class="profil-resmi">
         <h1>Alperen Acar</h1>
         <p>IMECAR Stajyeri</p>
     </header>
 
-    <section id="hakkinda" style="text-align: center; background: #ecf0f1; padding: 20px; border-radius: 10px; max-width: 800px; margin: 20px auto; border: 1px solid #bdc3c7;">
-        <h2 style="margin-top: 0; color: #2c3e50;">IMECAR Hakkında</h2>
-        <p style="color: #7f8c8d; line-height: 1.6;">
+    <section id="hakkinda">
+        <h2>IMECAR Hakkında</h2>
+        <p>
             IMECAR, sürdürülebilir enerji çözümleri ve elektrikli araç şarj istasyonları teknolojileri geliştiren öncü bir firmadır. 
             Bu staj süresince, şarj istasyonlarının montajından yazılım süreçlerine kadar birçok alanda tecrübe edinme şansı yakalıyorum.
         </p>
     </section>
 
-    <section id="staj-sayaci" style="text-align: center; background: white; padding: 20px; border-radius: 10px; max-width: 600px; margin: 20px auto; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
-        <h3 style="margin-top: 0; color: #2c3e50;">Staj Durumu</h3>
-        <p id="sayac-metni" style="font-size: 1.2em; font-weight: bold; color: #3498db; margin: 0;"></p>
+    <section id="staj-sayaci">
+        <h3>Staj Durumu</h3>
+        <p id="sayac-metni"></p>
     </section>
 
     <script>
         // --- TARİHLERİ BURADAN GÜNCELLE ---
-        // Saat bilgisini sabitleyerek sapmaları önlüyoruz
         const stajBaslangic = new Date("2026-02-09T00:00:00"); 
         const stajBitis = new Date("2026-05-24T00:00:00");
         // ----------------------------------
@@ -38,11 +39,9 @@
             let isGunuSayisi = 0;
             let suankiTarih = new Date(baslangic);
 
-            // Tarih karşılaştırması için saatleri sıfırla
             suankiTarih.setHours(0,0,0,0);
             bitis.setHours(0,0,0,0);
 
-            // 2026 Resmi Tatil Listesi (Yıl bazlı manuel eklendi)
             const resmiTatiller = [
                 "2026-03-20", // Ramazan Bayramı 1. Gün
                 "2026-03-21", // Ramazan Bayramı 2. Gün
@@ -53,11 +52,9 @@
             ];
 
             while (suankiTarih <= bitis) {
-                // 0 = Pazar, 6 = Cumartesi
                 let gun = suankiTarih.getDay();
                 let tarihStr = suankiTarih.toISOString().split('T')[0];
 
-                // Hafta sonu değilse VE resmi tatil değilse say
                 if (gun !== 0 && gun !== 6 && !resmiTatiller.includes(tarihStr)) {
                     isGunuSayisi++;
                 }
@@ -66,17 +63,12 @@
             return isGunuSayisi;
         }
 
-        // Bugünün tarihini alıp saatini sıfırla
         const bugun = new Date();
         bugun.setHours(0,0,0,0);
         
-        // Toplam iş günü sayısı
         const toplamIsGunu = hesaplaIsGunu(new Date(stajBaslangic), new Date(stajBitis));
-        
-        // Şu ana kadar geçen iş günü sayısı
         let gecenIsGunu = hesaplaIsGunu(new Date(stajBaslangic), new Date(bugun));
         
-        // Eğer bugün staj bitiş tarihinden sonraysa, toplam süreyi göster
         if (bugun > stajBitis) {
             gecenIsGunu = toplamIsGunu;
         }
@@ -91,7 +83,31 @@
         }
 
         document.getElementById("sayac-metni").innerText = mesaj;
+
+        // --- DARK MODE JAVASCRIPT ---
+        const toggleButton = document.getElementById('dark-mode-toggle');
+        const body = document.body;
+
+        // Sayfa yüklendiğinde kullanıcının tercihini kontrol et
+        if (localStorage.getItem('dark-mode') === 'enabled') {
+            body.classList.add('dark-mode');
+            toggleButton.textContent = 'Modu Değiştir ☀️';
+        }
+
+        toggleButton.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            
+            if (body.classList.contains('dark-mode')) {
+                toggleButton.textContent = 'Modu Değiştir ☀️';
+                localStorage.setItem('dark-mode', 'enabled');
+            } else {
+                toggleButton.textContent = 'Modu Değiştir 🌙';
+                localStorage.setItem('dark-mode', 'disabled');
+            }
+        });
+        // ----------------------------
     </script>
+
     <section id="staj-gunlugu">
         <h2>Staj Günlüğüm (Sayfa 1)</h2>
 
@@ -135,7 +151,6 @@
             <a href="sayfa2.html">2</a>
             <a href="sayfa3.html">3</a>
         </div>
-
     </section>
 
 </body>
