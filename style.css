@@ -8,7 +8,7 @@ body {
     align-items: center;
     padding: 20px;
     margin: 0;
-    transition: background-color 0.3s, color 0.3s; /* Renk geçiş efekti */
+    transition: background-color 0.3s, color 0.3s;
 }
 
 header {
@@ -38,7 +38,7 @@ p {
     line-height: 1.6;
 }
 
-/* --- Staj Günlüğü Kart Yapısı --- */
+/* --- Kutu Yapıları (Güncellendi) --- */
 #staj-gunlugu {
     width: 100%;
     display: flex;
@@ -47,7 +47,8 @@ p {
     gap: 20px;
 }
 
-.gunluk-kart {
+/* Hakkında, Sayaç ve Kartlar için ortak Kutu Stili */
+.gunluk-kart, #hakkinda, #staj-sayaci {
     background: white;
     border-radius: 15px;
     padding: 20px;
@@ -55,10 +56,11 @@ p {
     max-width: 500px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     transition: transform 0.3s ease, background-color 0.3s;
+    margin-bottom: 20px;
 }
 
 .gunluk-kart:hover {
-    transform: translateY(-5px); /* Hafif yukarı kalkma efekti */
+    transform: translateY(-5px);
 }
 
 .gunluk-kart h3 {
@@ -67,9 +69,9 @@ p {
 }
 
 .gunluk-resim {
-    width: 100%;       /* Kart genişliğine sığdır */
-    height: 250px;     /* Yüksekliği sabitle */
-    object-fit: cover; /* Resmi bozmadan sığdır */
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
     border-radius: 10px;
     margin-top: 10px;
 }
@@ -159,13 +161,13 @@ input:checked + .slider:before {
 }
 /* -------------------------------------- */
 
-/* --- DARK MODE ÖZELLİKLERİ (Yazı Sorunu Çözüldü) --- */
+/* --- DARK MODE ÖZELLİKLERİ --- */
 body.dark-mode {
-    background-color: #1a1a1a !important; /* Arka planı koyulaştır */
-    color: #ffffff !important;            /* Genel yazıları beyaza çevir */
+    background-color: #1a1a1a !important;
+    color: #ffffff !important;
 }
 
-/* Kutu içlerindeki tüm elemanlar ve başlıklar */
+/* Tüm Kutu Yapıları ve Yazı Elemanları */
 body.dark-mode .gunluk-kart,
 body.dark-mode section#hakkinda,
 body.dark-mode section#staj-sayaci,
@@ -173,10 +175,9 @@ body.dark-mode h1,
 body.dark-mode h2,
 body.dark-mode h3,
 body.dark-mode p,
-body.dark-mode header p,
-body.dark-mode .theme-switch-wrapper em {
-    background-color: #333333 !important; /* Kutuları koyulaştır */
-    color: #ffffff !important;            /* İçindeki yazıları beyaza çevir */
+body.dark-mode header p {
+    background-color: #333333 !important;
+    color: #ffffff !important;
     border-color: #444 !important;
 }
 
@@ -185,7 +186,7 @@ body.dark-mode .slider {
 }
 
 body.dark-mode input:checked + .slider {
-    background-color: #f1c40f !important; /* Koyu modda sarı (ay/güneş) */
+    background-color: #f1c40f !important;
 }
 
 /* Sayfalama butonları koyu mod */
