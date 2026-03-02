@@ -21,23 +21,52 @@
 
     <script>
         // --- TARİHLERİ BURADAN GÜNCELLE ---
-        const stajBaslangic = new Date("2026-02-09"); // YYYY-MM-DD
-        const stajBitis = new Date("2026-05-24");     // YYYY-MM-DD
+        // Saat bilgisini sabitleyerek sapmaları önlüyoruz
+        const stajBaslangic = new Date("2026-02-09T00:00:00"); 
+        const stajBitis = new Date("2026-05-24T00:00:00");
         // ----------------------------------
 
+        function hesaplaIsGunu(baslangic, bitis) {
+            let isGunuSayisi = 0;
+            let suankiTarih = new Date(baslangic);
+
+            // Tarih karşılaştırması için saatleri sıfırla
+            suankiTarih.setHours(0,0,0,0);
+            bitis.setHours(0,0,0,0);
+
+            while (suankiTarih <= bitis) {
+                // 0 = Pazar, 6 = Cumartesi
+                let gun = suankiTarih.getDay();
+                if (gun !== 0 && gun !== 6) {
+                    isGunuSayisi++;
+                }
+                suankiTarih.setDate(suankiTarih.getDate() + 1);
+            }
+            return isGunuSayisi;
+        }
+
+        // Bugünün tarihini alıp saatini sıfırla
         const bugun = new Date();
-        // Süreyi gün cinsinden hesapla
-        const toplamSure = Math.ceil((stajBitis - stajBaslangic) / (1000 * 60 * 60 * 24));
-        const gecenSure = Math.ceil((bugun - stajBaslangic) / (1000 * 60 * 60 * 24));
+        bugun.setHours(0,0,0,0);
         
+        // Toplam iş günü sayısı
+        const toplamIsGunu = hesaplaIsGunu(new Date(stajBaslangic), new Date(stajBitis));
+        
+        // Şu ana kadar geçen iş günü sayısı
+        let gecenIsGunu = hesaplaIsGunu(new Date(stajBaslangic), new Date(bugun));
+        
+        // Eğer bugün staj bitiş tarihinden sonraysa, toplam süreyi göster
+        if (bugun > stajBitis) {
+            gecenIsGunu = toplamIsGunu;
+        }
+
         let mesaj = "";
         if (bugun < stajBaslangic) {
             mesaj = "Staj henüz başlamadı.";
         } else if (bugun > stajBitis) {
             mesaj = "Staj başarıyla tamamlandı!";
         } else {
-            // Sadece iş günlerini hesaplamaz, takvim gününü hesaplar.
-            mesaj = `${gecenSure} / ${toplamSure} Gün Tamamlandı`;
+            mesaj = `${gecenIsGunu} / ${toplamIsGunu} İş Günü Tamamlandı`;
         }
 
         document.getElementById("sayac-metni").innerText = mesaj;
