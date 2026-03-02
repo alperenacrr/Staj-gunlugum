@@ -8,6 +8,7 @@ body {
     align-items: center;
     padding: 20px;
     margin: 0;
+    transition: background-color 0.3s, color 0.3s; /* Renk geçiş efekti */
 }
 
 header {
@@ -53,7 +54,7 @@ p {
     width: 90%;
     max-width: 500px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, background-color 0.3s;
 }
 
 .gunluk-kart:hover {
@@ -102,16 +103,73 @@ p {
     background-color: #3498db;
     color: white;
     border: 2px solid #3498db;
-
 }
+
 /* --- DARK MODE ÖZELLİKLERİ --- */
 body.dark-mode {
     background-color: #1a1a1a; /* Koyu arka plan */
-    color: #ffffff;           /* Beyaz yazılar */
+    color: #ffffff;            /* Beyaz yazılar */
 }
 
-body.dark-mode .container {
-    background-color: #333333; /* İç kutunun koyu hali */
+/* Hakkında ve Sayaç Bölümleri için Koyu Mod */
+section#hakkinda, 
+section#staj-sayaci {
+    transition: background-color 0.3s;
+}
+
+body.dark-mode section#hakkinda {
+    background-color: #333333 !important;
     color: #ffffff;
+    border: 1px solid #444 !important;
+}
+
+body.dark-mode section#staj-sayaci {
+    background-color: #333333 !important;
+    color: #ffffff;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3) !important;
+}
+
+body.dark-mode h1, 
+body.dark-mode h2, 
+body.dark-mode h3, 
+body.dark-mode p {
+    color: #ffffff !important;
+}
+
+body.dark-mode .gunluk-kart {
+    background-color: #333333;
+    color: #ffffff;
+    border: 1px solid #444;
+}
+
+body.dark-mode .pagination a {
+    background-color: #444;
+    color: white;
+    border: 2px solid #666;
+}
+
+body.dark-mode .pagination a:hover {
+    background-color: #3498db;
+    border: 2px solid #3498db;
+}
+
+/* Butonun stili (Fixed Pozisyon) */
+#dark-mode-toggle {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    padding: 10px 15px;
+    cursor: pointer;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    z-index: 1000;
+    transition: all 0.3s;
+}
+
+body.dark-mode #dark-mode-toggle {
+    background-color: #f1c40f;
+    color: #000;
 }
 /* ---------------------------- */
