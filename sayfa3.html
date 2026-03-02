@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="tr">
-<head><link rel="stylesheet" href="style.css">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Staj Günlüğüm | Sayfa 3</title>
@@ -8,8 +8,16 @@
 </head>
 <body>
     
+    <div class="theme-switch-wrapper">
+        <label class="theme-switch" for="checkbox">
+            <input type="checkbox" id="checkbox" />
+            <div class="slider round"></div>
+        </label>
+        <em style="margin-left: 10px; font-size: 0.9em; color: #333;">Karanlık Mod</em>
+    </div>
+
     <header>
-        <img src="resimler/profilresmi.jpg" alt="Profil Fotoğrafım" class="profil-resmi">
+        <img src="resimler/profil.jpg" alt="Profil Fotoğrafım" class="profil-resmi">
         <h1>Alperen Acar</h1>
         <p>IMECAR Stajyeri</p>
     </header>
@@ -20,44 +28,40 @@
         <div class="gunluk-kart">
             <h3>11. Gün:</h3>
             <p><strong>Tarih:</strong> 23 Şubat Pazartesi 2026</p>
-            <img src="resimler/imecartesisi.png" alt="11. Gün" class="gunluk-resim">
-            <p>Tesisin elektrik-elektronik bölümünü gezdim,şarj istasyonu haricinde yapılan diğer işler ile ilgili,piller,elektrikli araçlar ve projeler hakkında bilgi edindim. </p>
+            <p>İçerik buraya...</p>
         </div>
 
-        <div class="gunluk-kart">
-            <h3>12. Gün:</h3>
-            <p><strong>Tarih:</strong> 24 Şubat Salı 2026</p>
-            <img src="resimler/zımparaodası.jpg" alt="12. Gün" class="gunluk-resim">
-            <p>Günümü zımpara odasında geçirdim, taşlama ve parlatmayı öğrendim</p>
-        </div>
-
-        <div class="gunluk-kart">
-            <h3>13. Gün:</h3>
-            <p><strong>Tarih:</strong> 25 Şubat Çarşamba 2026</p>
-            <img src="resimler/üretimalanı.jpg" alt="13. Gün" class="gunluk-resim">
-            <p>Elektrik elektronik bölümündeki robotların yani üretim alanının içerisine girdim her bir adımı tek tek inceledim hangi robot ne yapıyor ne işe yarıyor öğrendim.</p>
-        </div>
-        
-         <div class="gunluk-kart">
-            <h3>14. Gün:</h3>
-            <p><strong>Tarih:</strong> 26 Şubat Perşembe 2026</p>
-            <img src="resimler/gun14.jpg" alt="14. Gün" class="gunluk-resim">
-            <p></p>
-        </div>
-
-        <div class="gunluk-kart">
-            <h3>15. Gün:</h3>
-            <p><strong>Tarih:</strong> 27 Şubat Cuma 2026</p>
-            <img src="resimler/parçakaynatımı.jpg" alt="15. Gün" class="gunluk-resim">
-            <p>bazı bükülmüş parçalar kaynatılacaktı bende kaynağı izledim usta gelip bana da denetti kaynak yapmayı da öğrenmiş oldum</p>
-        </div>
         <div class="pagination">
             <a href="index.html">1</a>
             <a href="sayfa2.html">2</a>
             <a href="sayfa3.html" class="active">3</a>
         </div>
-
     </section>
 
+    <script>
+        // --- DARK MODE JAVASCRIPT (TÜM SAYFALAR İÇİN) ---
+        const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
+        const currentTheme = localStorage.getItem('theme');
+
+        if (currentTheme) {
+            document.body.classList.add(currentTheme);
+            if (currentTheme === 'dark-mode') {
+                toggleSwitch.checked = true;
+            }
+        }
+
+        function switchTheme(e) {
+            if (e.target.checked) {
+                document.body.classList.add('dark-mode');
+                localStorage.setItem('theme', 'dark-mode');
+            } else {
+                document.body.classList.remove('dark-mode');
+                localStorage.setItem('theme', 'light-mode');
+            }
+        }
+
+        toggleSwitch.addEventListener('change', switchTheme, false);
+        // --------------------------------------------
+    </script>
 </body>
 </html>
