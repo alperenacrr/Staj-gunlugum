@@ -105,43 +105,87 @@ p {
     border: 2px solid #3498db;
 }
 
+/* --- ŞIK DARK MODE TOGGLE (Sağ Üstte) --- */
+.theme-switch-wrapper {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    z-index: 1000;
+}
+
+.theme-switch {
+    display: inline-block;
+    height: 34px;
+    position: relative;
+    width: 60px;
+}
+
+.theme-switch input {
+    display:none;
+}
+
+.slider {
+    background-color: #ccc;
+    bottom: 0;
+    cursor: pointer;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    background-color: white;
+    bottom: 4px;
+    content: "";
+    height: 26px;
+    left: 4px;
+    position: absolute;
+    transition: .4s;
+    width: 26px;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #3498db;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+/* -------------------------------------- */
+
 /* --- DARK MODE ÖZELLİKLERİ (Yazı Sorunu Çözüldü) --- */
 body.dark-mode {
     background-color: #1a1a1a !important; /* Arka planı koyulaştır */
     color: #ffffff !important;            /* Genel yazıları beyaza çevir */
 }
 
-/* Kutu içlerindeki tüm elemanlar */
+/* Kutu içlerindeki tüm elemanlar ve başlıklar */
 body.dark-mode .gunluk-kart,
 body.dark-mode section#hakkinda,
 body.dark-mode section#staj-sayaci,
 body.dark-mode h1,
 body.dark-mode h2,
 body.dark-mode h3,
-body.dark-mode p {
+body.dark-mode p,
+body.dark-mode header p,
+body.dark-mode .theme-switch-wrapper em {
     background-color: #333333 !important; /* Kutuları koyulaştır */
     color: #ffffff !important;            /* İçindeki yazıları beyaza çevir */
     border-color: #444 !important;
 }
 
-/* Butonun stili (Fixed Pozisyon) */
-#dark-mode-toggle {
-    position: fixed;
-    top: 10px;
-    right: 10px;
-    padding: 10px 15px;
-    cursor: pointer;
-    background-color: #3498db;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    z-index: 1000;
-    transition: all 0.3s;
+body.dark-mode .slider {
+    background-color: #444;
 }
 
-body.dark-mode #dark-mode-toggle {
-    background-color: #f1c40f !important;
-    color: #000 !important;
+body.dark-mode input:checked + .slider {
+    background-color: #f1c40f !important; /* Koyu modda sarı (ay/güneş) */
 }
 
 /* Sayfalama butonları koyu mod */
