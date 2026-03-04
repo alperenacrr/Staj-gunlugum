@@ -8,12 +8,14 @@
 </head>
 <body>
     
-    <div class="dark-mode-container" style="text-align: right; padding: 20px;">
-        <label class="switch">
-            <input type="checkbox" id="darkModeToggle" onclick="toggleDarkMode()">
-            <span class="slider round"></span>
-        </label>
-        <span class="dark-mode-text" style="margin-left: 10px; font-style: italic; font-size: 14px;">Karanlık Mod</span>
+    <div style="display: flex; justify-content: flex-end; padding: 20px;">
+        <div class="dark-mode-container" style="display: flex; align-items: center; gap: 10px;">
+            <label class="switch">
+                <input type="checkbox" id="darkModeToggle" onclick="toggleDarkMode()">
+                <span class="slider round"></span>
+            </label>
+            <span class="dark-mode-text" style="color: inherit; font-style: italic; font-size: 14px;">Karanlık Mod</span>
+        </div>
     </div>
 
     <header>
@@ -74,7 +76,6 @@
             localStorage.setItem('darkMode', isDark);
         }
 
-        // Sayfa yüklendiğinde hafızadaki durumu uygula
         window.onload = function() {
             const isDark = localStorage.getItem('darkMode') === 'true';
             if (isDark) {
