@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Staj Günlüğü</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; background: #f4f4f9; }
+        .gun-kart { background: white; padding: 15px; margin-bottom: 10px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        h3 { color: #3f51b5; margin-top: 0; }
+        button { background: #3f51b5; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; }
+        button:hover { background: #303f9f; }
+    </style>
+</head>
+<body>
+
+    <h2>Staj Günlüğü</h2>
+    <button onclick="gunEkle()">➕ Yeni Gün Ekle</button>
+    <hr>
+    
+    <div id="gunlukListesi">
+        </div>
+
+    <script>
+        // En son kaçıncı günde kaldığımızı tutan değişken
+        let sonGun = 16; 
+
+        function gunEkle() {
+            // Gün sayısını 1 artırıyoruz
+            sonGun++; 
+            
+            // Bugünün tarihini alıyoruz
+            const tarih = new Date().toLocaleDateString('tr-TR');
+
+            // Yeni bir HTML kutusu (kartı) oluşturuyoruz
+            const yeniKart = `
+                <div class="gun-kart">
+                    <h3>GÜN ${sonGun} - (${tarih})</h3>
+                    <textarea rows="3" style="width:100%" placeholder="Bugün neler yaptın?"></textarea>
+                </div>
+            `;
+
+            // Listeye ekliyoruz
+            document.getElementById('gunlukListesi').innerHTML += yeniKart;
+        }
+    </script>
+
+</body>
+</html>
