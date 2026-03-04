@@ -5,17 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Staj Günlüğüm | Sayfa 3</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Butonu ekrana sabitlemek için gereken özel stil */
+        .fixed-toggle-container {
+            position: fixed; /* Sayfa kaysa da buton sabit kalır */
+            top: 20px;       /* Üstten boşluk */
+            right: 20px;     /* Sağdan boşluk */
+            z-index: 9999;   /* Diğer her şeyin üstünde görünmesi için */
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(128, 128, 128, 0.1); /* Hafif şeffaf arka plan */
+            padding: 10px;
+            border-radius: 50px;
+            backdrop-filter: blur(5px); /* Arkayı hafif bulanıklaştırır, şık durur */
+        }
+    </style>
 </head>
 <body>
     
-    <div style="width: 100%; display: flex; justify-content: flex-end; padding: 10px; box-sizing: border-box;">
-        <div style="display: flex; align-items: center; gap: 8px;">
-            <label class="switch" style="position: relative; display: inline-block; width: 60px; height: 34px; margin: 0;">
-                <input type="checkbox" id="darkModeToggle" onclick="toggleDarkMode()" style="opacity: 0; width: 0; height: 0;">
-                <span class="slider round"></span>
-            </label>
-            <span style="font-size: 14px; font-style: italic; opacity: 0.8;">Karanlık Mod</span>
-        </div>
+    <div class="fixed-toggle-container">
+        <label class="switch" style="position: relative; display: inline-block; width: 60px; height: 34px; margin: 0;">
+            <input type="checkbox" id="darkModeToggle" onclick="toggleDarkMode()" style="opacity: 0; width: 0; height: 0;">
+            <span class="slider round"></span>
+        </label>
+        <span style="font-size: 14px; font-style: italic; opacity: 0.8;">Karanlık Mod</span>
     </div>
 
     <header>
@@ -78,10 +92,10 @@
         window.addEventListener('load', () => {
             if (localStorage.getItem('darkMode') === 'true') {
                 document.body.classList.add('dark-mode');
-                document.getElementById('darkModeToggle').checked = true;
+                const toggle = document.getElementById('darkModeToggle');
+                if (toggle) toggle.checked = true;
             }
         });
     </script>
 </body>
-
 </html>
