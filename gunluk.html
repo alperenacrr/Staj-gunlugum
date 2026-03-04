@@ -2,47 +2,36 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <title>Staj Günlüğü</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staj Günlüğü Pro</title>
     <style>
-        body { font-family: sans-serif; padding: 20px; background: #f4f4f9; }
-        .gun-kart { background: white; padding: 15px; margin-bottom: 10px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        h3 { color: #3f51b5; margin-top: 0; }
-        button { background: #3f51b5; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; }
-        button:hover { background: #303f9f; }
-    </style>
-</head>
-<body>
-
-    <h2>Staj Günlüğü</h2>
-    <button onclick="gunEkle()">➕ Yeni Gün Ekle</button>
-    <hr>
-    
-    <div id="gunlukListesi">
-        </div>
-
-    <script>
-        // En son kaçıncı günde kaldığımızı tutan değişken
-        let sonGun = 16; 
-
-        function gunEkle() {
-            // Gün sayısını 1 artırıyoruz
-            sonGun++; 
-            
-            // Bugünün tarihini alıyoruz
-            const tarih = new Date().toLocaleDateString('tr-TR');
-
-            // Yeni bir HTML kutusu (kartı) oluşturuyoruz
-            const yeniKart = `
-                <div class="gun-kart">
-                    <h3>GÜN ${sonGun} - (${tarih})</h3>
-                    <textarea rows="3" style="width:100%" placeholder="Bugün neler yaptın?"></textarea>
-                </div>
-            `;
-
-            // Listeye ekliyoruz
-            document.getElementById('gunlukListesi').innerHTML += yeniKart;
+        /* Görsel Tasarım (CSS) */
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            padding: 40px; 
+            background: #f0f2f5; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
-    </script>
+        .container { width: 100%; max-width: 600px; }
+        h2 { color: #1a237e; border-bottom: 2px solid #1a237e; padding-bottom: 10px; }
+        
+        .btn-ekle { 
+            background: #1a237e; 
+            color: white; 
+            border: none; 
+            padding: 12px 24px; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            font-size: 16px;
+            font-weight: bold;
+            transition: 0.3s;
+            margin-bottom: 20px;
+        }
+        .btn-ekle:hover { background: #3949ab; transform: scale(1.05); }
 
-</body>
-</html>
+        .gun-kart { 
+            background: white; 
+            padding: 20px; 
+            margin-bottom: 1
