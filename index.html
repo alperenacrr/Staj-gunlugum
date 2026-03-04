@@ -3,17 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Staj Günlüğüm | 9 Şubat - 24 Mayıs</title>
+    <title>Staj Günlüğüm | Yeni Başlangıç</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Butonu ekrana sabitlemek için gereken stil */
+        .fixed-toggle-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(128, 128, 128, 0.1);
+            padding: 10px;
+            border-radius: 50px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+    </style>
 </head>
 <body>
     
-    <div class="theme-switch-wrapper">
-        <label class="theme-switch" for="checkbox">
-            <input type="checkbox" id="checkbox" />
-            <div class="slider round"></div>
+    <div class="fixed-toggle-container">
+        <label class="switch" style="position: relative; display: inline-block; width: 60px; height: 34px; margin: 0;">
+            <input type="checkbox" id="darkModeToggle" onclick="toggleDarkMode()" style="opacity: 0; width: 0; height: 0;">
+            <span class="slider round"></span>
         </label>
-        <em style="margin-left: 10px; font-size: 0.9em; color: #333;">Karanlık Mod</em>
+        <span style="font-size: 14px; font-style: italic; opacity: 0.8;">Karanlık Mod</span>
     </div>
 
     <header>
@@ -22,45 +39,49 @@
         <p>IMECAR Stajyeri</p>
     </header>
 
-    <section id="hakkinda">
-        <h2>IMECAR Hakkında</h2>
-        <p>
+    <section id="hakkinda" style="text-align: center; background: #ecf0f1; padding: 20px; border-radius: 10px; max-width: 800px; margin: 20px auto; border: 1px solid #bdc3c7;">
+        <h2 style="margin-top: 0; color: #2c3e50;">IMECAR Hakkında</h2>
+        <p style="color: #7f8c8d; line-height: 1.6;">
             IMECAR, sürdürülebilir enerji çözümleri ve elektrikli araç şarj istasyonları teknolojileri geliştiren öncü bir firmadır. 
             Bu staj süresince, şarj istasyonlarının montajından yazılım süreçlerine kadar birçok alanda tecrübe edinme şansı yakalıyorum.
         </p>
     </section>
 
-    <section id="staj-sayaci">
-        <h3>Staj Durumu</h3>
-        <p id="sayac-metni"></p>
+    <section id="staj-sayaci" style="text-align: center; background: white; padding: 20px; border-radius: 10px; max-width: 600px; margin: 20px auto; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+        <h3 style="margin-top: 0; color: #2c3e50;">Staj Durumu</h3>
+        <p id="sayac-metni" style="font-size: 1.2em; font-weight: bold; color: #3498db; margin: 0;"></p>
+    </section>
+
+    <section id="staj-gunlugu">
+        <h2>Staj Günlüğüm (Sayfa 1)</h2>
+
+        <div class="gunluk-kart">
+            <h3>1. Gün:</h3>
+            <p><strong>Tarih:</strong> 9 Şubat Pazartesi 2026</p>
+            <p>Bugün stajımın ilk günü. Yazılım alanında Frontend,Backend,cloud,Fullstack ve database alanlarında araştırma yaptım. Frontend ve Backend üzerine pekiştirme amaçlı bir çalışma yapmak istedim ve yapay zekadan destek alarak bu siteyi oluşturdum. </p>
+        </div>
+
+        <div class="pagination">
+            <a href="index.html" class="active">1</a>
+        </div>
     </section>
 
     <script>
-        // --- TARİHLERİ BURADAN GÜNCELLE ---
+        // --- STAJ SAYACI VE KARANLIK MOD MANTIĞI ---
         const stajBaslangic = new Date("2026-02-09T00:00:00"); 
         const stajBitis = new Date("2026-05-24T00:00:00");
-        // ----------------------------------
 
         function hesaplaIsGunu(baslangic, bitis) {
             let isGunuSayisi = 0;
             let suankiTarih = new Date(baslangic);
-
             suankiTarih.setHours(0,0,0,0);
             bitis.setHours(0,0,0,0);
 
-            const resmiTatiller = [
-                "2026-03-20", // Ramazan Bayramı 1. Gün
-                "2026-03-21", // Ramazan Bayramı 2. Gün
-                "2026-03-22", // Ramazan Bayramı 3. Gün
-                "2026-04-23", // Ulusal Egemenlik ve Çocuk Bayramı
-                "2026-05-01", // Emek ve Dayanışma Günü
-                "2026-05-19"  // Atatürk'ü Anma, Gençlik ve Spor Bayramı
-            ];
+            const resmiTatiller = ["2026-03-20", "2026-03-21", "2026-03-22", "2026-04-23", "2026-05-01", "2026-05-19"];
 
             while (suankiTarih <= bitis) {
                 let gun = suankiTarih.getDay();
                 let tarihStr = suankiTarih.toISOString().split('T')[0];
-
                 if (gun !== 0 && gun !== 6 && !resmiTatiller.includes(tarihStr)) {
                     isGunuSayisi++;
                 }
@@ -71,94 +92,31 @@
 
         const bugun = new Date();
         bugun.setHours(0,0,0,0);
-        
         const toplamIsGunu = hesaplaIsGunu(new Date(stajBaslangic), new Date(stajBitis));
         let gecenIsGunu = hesaplaIsGunu(new Date(stajBaslangic), new Date(bugun));
         
-        if (bugun > stajBitis) {
-            gecenIsGunu = toplamIsGunu;
-        }
+        if (bugun > stajBitis) gecenIsGunu = toplamIsGunu;
 
         let mesaj = "";
-        if (bugun < stajBaslangic) {
-            mesaj = "Staj henüz başlamadı.";
-        } else if (bugun > stajBitis) {
-            mesaj = "Staj başarıyla tamamlandı!";
-        } else {
-            mesaj = `${gecenIsGunu} / ${toplamIsGunu} İş Günü Tamamlandı`;
-        }
+        if (bugun < stajBaslangic) mesaj = "Staj henüz başlamadı.";
+        else if (bugun > stajBitis) mesaj = "Staj başarıyla tamamlandı!";
+        else mesaj = `${gecenIsGunu} / ${toplamIsGunu} İş Günü Tamamlandı`;
 
         document.getElementById("sayac-metni").innerText = mesaj;
 
-        // --- DARK MODE JAVASCRIPT ---
-        const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
-        const currentTheme = localStorage.getItem('theme');
-
-        if (currentTheme) {
-            document.body.classList.add(currentTheme);
-            if (currentTheme === 'dark-mode') {
-                toggleSwitch.checked = true;
-            }
+        // KARANLIK MOD FONKSİYONU
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
         }
 
-        function switchTheme(e) {
-            if (e.target.checked) {
+        window.addEventListener('load', () => {
+            if (localStorage.getItem('darkMode') === 'true') {
                 document.body.classList.add('dark-mode');
-                localStorage.setItem('theme', 'dark-mode');
-            } else {
-                document.body.classList.remove('dark-mode');
-                localStorage.setItem('theme', 'light-mode');
+                const toggle = document.getElementById('darkModeToggle');
+                if (toggle) toggle.checked = true;
             }
-        }
-
-        toggleSwitch.addEventListener('change', switchTheme, false);
-        // ----------------------------
+        });
     </script>
-
-    <section id="staj-gunlugu">
-        <h2>Staj Günlüğüm (Sayfa 1)</h2>
-
-        <div class="gunluk-kart">
-            <h3>1. Gün:</h3>
-            <p><strong>Tarih:</strong> 9 Şubat Pazartesi 2026</p>
-            <img src="resimler/gun1.jpg" alt="1. Gün" class="gunluk-resim">
-            <p>Bugün stajın ilk günü, pek bir iş yapmadım, elektrikli şarj istasyonlarının parçalarının toplanmasına yani montajına yardımcı oldum.</p>
-        </div>
-
-        <div class="gunluk-kart">
-            <h3>2. Gün:</h3>
-            <p><strong>Tarih:</strong> 10 Şubat Salı 2026</p>
-            <img src="resimler/gun2.jpg" alt="2. Gün" class="gunluk-resim">
-            <p>telefon kullanımımız yasak oldugu için fotoğraf yok. alet takımlarını öğrendim ve tanıdım aynı şekilde parçaların montajına yardım ettim.</p>
-        </div>
-        
-        <div class="gunluk-kart">
-            <h3>3. Gün:</h3>
-            <p><strong>Tarih:</strong> 11 Şubat Çarşamba 2026</p>
-            <img src="resimler/abkantbüküm.jpg" alt="3. Gün" class="gunluk-resim">
-            <p>Bugün abkant büküm makinesi ile düz olan parçaları tek tek büküp sarj istasyonunun parçaları haline getirdik, ustam bükerken bende nasıl oldugunu öğrendim ve 4-5 parçayı ben büktüm.</p>
-        </div>
-
-        <div class="gunluk-kart">
-            <h3>4. Gün:</h3>
-            <p><strong>Tarih:</strong> 12 Şubat Perşembe 2026</p>
-            <img src="resimler/gun4.jpg" alt="4. Gün" class="gunluk-resim">
-            <p>Yerleri süpürdüm, çelik parçaları taşıdım,zımpara odasında taşlama ve zımpara işlemlerini gözlemledim</p>
-        </div>
-
-        <div class="gunluk-kart">
-            <h3>5. Gün:</h3>
-            <p><strong>Tarih:</strong> 13 Şubat Cuma 2026</p>
-            <img src="resimler/boyahane.jpg" alt="5. Gün" class="gunluk-resim">
-            <p>Büküm atölyesinde küçük parçaların bükümünü sağladım. Daha sonra boyahaneye gittim ve parçaları askılığa takıp boyanmasını izledim</p>
-        </div>
-
-        <div class="pagination">
-            <a href="index.html" class="active">1</a>
-            <a href="sayfa2.html">2</a>
-            <a href="sayfa3.html">3</a>
-        </div>
-    </section>
-
 </body>
 </html>
