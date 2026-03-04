@@ -8,8 +8,12 @@
 </head>
 <body>
     
-    <div style="text-align: right; padding: 15px;">
-        <button onclick="toggleDarkMode()" id="darkModeBtn" style="padding: 8px 15px; cursor: pointer; border-radius: 20px; border: 1px solid #ccc; background: #eee;">Karanlık Mod Değiştir</button>
+    <div class="dark-mode-container" style="text-align: right; padding: 20px;">
+        <label class="switch">
+            <input type="checkbox" id="darkModeToggle" onclick="toggleDarkMode()">
+            <span class="slider round"></span>
+        </label>
+        <span class="dark-mode-text" style="margin-left: 10px; font-style: italic; font-size: 14px;">Karanlık Mod</span>
     </div>
 
     <header>
@@ -65,18 +69,18 @@
 
     <script>
         function toggleDarkMode() {
-            var element = document.body;
-            element.classList.toggle("dark-mode");
-            
-            // Seçimi hatırla
-            var isDark = element.classList.contains("dark-mode");
-            localStorage.setItem("darkMode", isDark);
+            const body = document.body;
+            const isDark = body.classList.toggle('dark-mode');
+            localStorage.setItem('darkMode', isDark);
         }
 
-        // Sayfa açıldığında hafızayı kontrol et
+        // Sayfa yüklendiğinde hafızadaki durumu uygula
         window.onload = function() {
-            if (localStorage.getItem("darkMode") === "true") {
-                document.body.classList.add("dark-mode");
+            const isDark = localStorage.getItem('darkMode') === 'true';
+            if (isDark) {
+                document.body.classList.add('dark-mode');
+                const toggle = document.getElementById('darkModeToggle');
+                if (toggle) toggle.checked = true;
             }
         };
     </script>
