@@ -39,4 +39,47 @@
             <h3>13. Gün:</h3>
             <p><strong>Tarih:</strong> 25 Şubat Çarşamba 2026</p>
             <img src="resimler/üretimalanı.jpg" alt="13. Gün" class="gunluk-resim">
-            <p>Elektrik elektronik bölümündeki robotların yani üretim alanının içerisine girdim her bir adımı tek tek
+            <p>Elektrik elektronik bölümündeki robotların yani üretim alanının içerisine girdim her bir adımı tek tek inceledim hangi robot ne yapıyor ne işe yarıyor öğrendim.</p>
+        </div>
+        
+         <div class="gunluk-kart">
+            <h3>14. Gün:</h3>
+            <p><strong>Tarih:</strong> 26 Şubat Perşembe 2026</p>
+            <img src="resimler/epdmbant.png" alt="14. Gün" class="gunluk-resim">
+            <p>epdm bant ile parçaların montajının yapılacağı alanların montaj sırasında boya aşınması veya parçanın herhangi bir zarar görmemesi için bantlama şilemlerini yaptım.</p>
+        </div>
+
+        <div class="gunluk-kart">
+            <h3>15. Gün:</h3>
+            <p><strong>Tarih:</strong> 27 Şubat Cuma 2026</p>
+            <img src="resimler/parçakaynatımı.jpg" alt="15. Gün" class="gunluk-resim">
+            <p>bazı bükülmüş parçalar kaynatılacaktı bende kaynağı izledim usta gelip bana da denetti kaynak yapmayı da öğrenmiş oldum</p>
+        </div>
+
+        <div class="pagination">
+            <a href="index.html">1</a>
+            <a href="sayfa2.html">2</a>
+            <a href="sayfa3.html" class="active">3</a>
+        </div>
+    </section>
+
+    <script>
+        function toggleDarkMode() {
+            var element = document.body;
+            element.classList.toggle("dark-mode");
+            
+            // Seçimi hatırla
+            var isDark = element.classList.contains("dark-mode");
+            localStorage.setItem("darkMode", isDark);
+        }
+
+        // Sayfa açıldığında hafızayı kontrol et
+        window.onload = function() {
+            if (localStorage.getItem("darkMode") === "true") {
+                document.body.classList.add("dark-mode");
+            }
+        };
+    </script>
+
+</body>
+</html>
