@@ -2,36 +2,70 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Staj Günlüğü Pro</title>
+    <title>Kalıcı Staj Günlüğü</title>
     <style>
-        /* Görsel Tasarım (CSS) */
-        body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            padding: 40px; 
-            background: #f0f2f5; 
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+        body { font-family: 'Segoe UI', sans-serif; padding: 30px; background: #f0f2f5; display: flex; flex-direction: column; align-items: center; }
         .container { width: 100%; max-width: 600px; }
-        h2 { color: #1a237e; border-bottom: 2px solid #1a237e; padding-bottom: 10px; }
-        
-        .btn-ekle { 
-            background: #1a237e; 
-            color: white; 
-            border: none; 
-            padding: 12px 24px; 
-            border-radius: 8px; 
-            cursor: pointer; 
-            font-size: 16px;
-            font-weight: bold;
-            transition: 0.3s;
-            margin-bottom: 20px;
-        }
-        .btn-ekle:hover { background: #3949ab; transform: scale(1.05); }
+        .btn-ekle { background: #1a237e; color: white; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-weight: bold; margin-bottom: 20px; }
+        .gun-kart { background: white; padding: 20px; margin-bottom: 15px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border-left: 5px solid #1a237e; }
+        h3 { margin: 0 0 10px 0; color: #303f9f; font-size: 16px; }
+        textarea { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; resize: vertical; box-sizing: border-box; }
+    </style>
+</head>
+<body>
 
-        .gun-kart { 
-            background: white; 
-            padding: 20px; 
-            margin-bottom: 1
+    <div class="container">
+        <h2>📝 Kalıcı Staj Günlüğü</h2>
+        <button class="btn-ekle" onclick="yeniGunOlustur()">➕ Yeni Gün Ekle</button>
+        <div id="gunlukListesi"></div>
+    </div>
+
+    <script>
+        // 1. Verileri Hafızadan Yükle (Eğer boşsa boş liste getir)
+        let gunler = JSON.parse(localStorage.getItem('stajVerileri')) || [];
+
+        // Sayfa açıldığında kayıtlı günleri ekrana bas
+        ekraniGuncelle();
+
+        function yeniGunOlustur() {
+            // En son gün sayısını bul ve 1 artır
+            let sonNo = gunler.length > 0 ? Math.max(...gunler.map(g => g.no)) : 15;
+            let yeniNo = sonNo + 1;
+            let bugun = new Date().toLocaleDateString('tr-TR');
+
+            // Yeni günü listeye ekle
+            gunler.unshift({ no: yeniNo, tarih: bugun, icerik: "" });
+            
+            kaydetVeGuncelle();
+        }
+
+        function metniKaydet(index, metin) {
+            // Yazılan metni listede güncelle
+            gunler[index].icerik = metin;
+            localStorage.setItem('stajVerileri', JSON.stringify(gunler));
+        }
+
+        function kaydetVeGuncelle() {
+            localStorage.setItem('stajVerileri', JSON.stringify(gunler));
+            ekraniGuncelle();
+        }
+
+        function ekraniGuncelle() {
+            const liste = document.getElementById('gunlukListesi');
+            liste.innerHTML = "";
+
+            gunler.forEach((gun, index) => {
+                liste.innerHTML += `
+                    <div class="gun-kart">
+                        <h3>GÜN ${gun.no} | ${gun.tarih}</h3>
+                        <textarea 
+                            oninput="metniKaydet(${index}, this.value)" 
+                            placeholder="Bugün neler yaptın?..."
+                        >${gun.icerik}</textarea>
+                    </div>
+                `;
+            });
+        }
+    </script>
+</body>
+</html>
